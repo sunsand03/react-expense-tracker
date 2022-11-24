@@ -8,7 +8,7 @@ export function ExpenseInput(props) {
           <input
             type="text"
             className="form-control"
-            placeholder='Ex : "Apple"'
+            placeholder='Ex : "Pomme"'
           />
         </div>
         <div className="col-12 col-sm-2 col-md-4 col-lg-4 mb-2">
