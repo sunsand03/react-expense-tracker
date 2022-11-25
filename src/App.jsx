@@ -1,4 +1,4 @@
-import { IncomeInput } from "components/IncomeInput/IncomeInput";
+import { IncomeInput } from "containers/IncomeInput/IncomeInput";
 import { List } from "components/List/List";
 import { ExpenseInput } from "containers/ExpenseInput/ExpenseInput";
 import { useSelector } from "react-redux";
