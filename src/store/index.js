@@ -1,30 +1,49 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { expenseSlice } from "./expense/expense-slice";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-
-// 3 Set a configuration and whitelist for slices reducer you want to persist
+import storage from "redux-persist/lib/storage";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+//[x] 1 Combine the reducers ( slices content ) into a single reducer
+const rootReducer = combineReducers({
+  EXPENSE: expenseSlice.reducer,
+});
+//[x] 2 Create a basic configuration to tell redux to use the local storage
 const persistConfig = {
   key: "root",
+  version: 1,
   storage,
   whitelist: ["EXPENSE"],
 };
 
-// 1 Combine the reducers into a single reducer
-const allReducers = combineReducers({
-  EXPENSE: expenseSlice.reducer,
-});
+//[x] 3 Persist the reducers
+const persistedReducers = persistReducer(persistConfig, rootReducer);
 
-// 4 Persist the combined reducers using the configurations provided
-const persistedReducers = persistReducer(persistConfig, allReducers);
-
-// 2 Create the store with the persisted reducers
+//[x] 4 Send the persisted reducers to the store
 const store = configureStore({
   reducer: persistedReducers,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
-// 5 Persisted store to send to the PersistGate provider
-let persistor = persistStore(store);
+//[x] 5 Create a persisted version of the store
+const persistor = persistStore(store);
 
-// 6 Export the persisted store as well
+//[x] 6 Export the persisted version of the store
+
+//[] 7 Use the PersistGate component to give your app access to the persisted store
+
+//[] 8 Tell Redux to ignore all the actions sent by redux-persist
+
 export { store, persistor };
