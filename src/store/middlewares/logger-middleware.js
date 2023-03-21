@@ -1,17 +1,13 @@
-import { createListenerMiddleware, is } from '@reduxjs/toolkit'
-import { addExpenseAction, incrementActionPerfomed, setIncomeAction } from 'store/expense/expense-slice'
+import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit'
+import { setIncomeAction, addExpenseAction, incrementActionPerformed } from 'store/expense/expense-slice'
 
 export const loggerMiddleware = createListenerMiddleware()
 
 loggerMiddleware.startListening({
-    predicate: (action, currentState, previousState) => {
-        return action.type !== "expenseSlice/incrementActionPerfomed"
-        //return action.type === "expenseSlice/addExpenseAction" || action.type === "expenseSlice/setIncomeAction"
-    },
-    //  matcher: isAnyOf(setIncomeAction, addExpenseAction),
-    effect: async (action, listenerApi) => {
-        console.log("Action called ", action)
-        listenerApi.dispatch(incrementActionPerfomed())
-        console.log("New store value", listenerApi.getState())
-    },
+    matcher: isAnyOf(setIncomeAction, addExpenseAction),
+    effect: async (action, listenerAPI) => {
+        console.log("Action ", action)
+        listenerAPI.dispatch(incrementActionPerformed())
+        console.log("New store value ", listenerAPI.getState())
+    }
 })

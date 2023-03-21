@@ -14,10 +14,10 @@ export const expenseSlice = createSlice({
     setIncomeAction: (currentSlice, action) => {
       currentSlice.income = action.payload;
     },
-    incrementActionPerfomed: (currentSlice, action) => {
+    incrementActionPerformed: (currentSlice, action) => {
       currentSlice.countActionPerformed++
     },
   },
 });
 
-export const { addExpenseAction, setIncomeAction, incrementActionPerfomed } = expenseSlice.actions;
+export const { addExpenseAction, setIncomeAction, incrementActionPerformed } = expenseSlice.actions;
