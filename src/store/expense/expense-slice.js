@@ -1,11 +1,11 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 export const expenseSlice = createSlice({
   name: "expenseSlice",
   initialState: {
     income: 1000,
     expenseList: [],
-    countActionPerformed: 0
+    countActionPerformed: 0,
   },
   reducers: {
     addExpenseAction: (currentSlice, action) => {
@@ -15,9 +15,10 @@ export const expenseSlice = createSlice({
       currentSlice.income = action.payload;
     },
     incrementActionPerformed: (currentSlice, action) => {
-      currentSlice.countActionPerformed++
+      currentSlice.countActionPerformed++;
     },
   },
 });
 
-export const { addExpenseAction, setIncomeAction, incrementActionPerformed } = expenseSlice.actions;
+export const { addExpenseAction, setIncomeAction, incrementActionPerformed } =
+  expenseSlice.actions;
