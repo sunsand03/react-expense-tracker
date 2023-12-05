@@ -1,8 +1,11 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 export const expenseSlice = createSlice({
-    name: 'expenseSlice',
-    initialState: {
-        expenseList: [{ name: 'Apple', price: 1.00 }, { name: 'Laptop', price: 1000.00 }]
-    }
-})
+  name: "expenseSlice",
+  initialState: {
+    expenseList: [
+      { name: "Apple", price: 1.0 },
+      { name: "Laptop", price: 1000.0 },
+    ],
+  },
+});
